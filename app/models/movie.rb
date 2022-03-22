@@ -6,7 +6,7 @@ class Movie < ApplicationRecord
   validates :overview, presence: true
 
   include PgSearch::Model
-  pg_search_scope :search_by_title_and_overview,
+  pg_search_scope :global_search,
     against: [ :title, :overview ],
     using: {
       tsearch: { prefix: true }
