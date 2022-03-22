@@ -14,7 +14,7 @@ class ListsController < ApplicationController
       @movies = Movie.global_search(params[:query])
     # raise
     else
-      @movies = Movie.all
+      @movies = @list.movies
     end
   end
 
