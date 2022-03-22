@@ -1,5 +1,21 @@
+<%# <head>
+    <meta charset="UTF-8">
+    <title>OMDb API</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  </head> %>
+
+
+
 <div class="container mb-5"></div>
   <div class="row my-2">
+    <%= form_tag list_path, method: :get do %>
+      <%= text_field_tag :query,
+        params[:query],
+        class: "form-control",
+        placeholder: "Search movies in list"
+      %>
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    <% end %>
       <% @list.movies.each do |movie| %>
         <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
         <div class="col-md-4 mb-4">

@@ -10,6 +10,12 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
+    if params[:query].present?
+      @movies = Movie.global_search(params[:query])
+    # raise
+    else
+      @movies = Movie.all
+    end
   end
 
   def create
