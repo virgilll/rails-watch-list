@@ -8,7 +8,7 @@
 
 <div class="container mb-5"></div>
   <div class="row my-2">
-    <%= form_tag list_path, method: :get do %>
+    <%= form_tag list_path(@list), method: :get do %>
       <%= text_field_tag :query,
         params[:query],
         class: "form-control",
@@ -16,7 +16,7 @@
       %>
       <%= submit_tag "Search", class: "btn btn-primary" %>
     <% end %>
-      <% @list.movies.each do |movie| %>
+      <% @movies.each do |movie| %>
         <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
         <div class="col-md-4 mb-4">
           <div class="bg-white rounded shadow h-100">

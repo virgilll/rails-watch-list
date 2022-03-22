@@ -1,9 +1,10 @@
-class MoviesController < ApplicationController
-  def index
-    if params[:query].present?
-      @movies = Movie.global_search(params[:query])
-    else
-      @movies = Movie.all
-    end
-  end
-end
+# class MoviesController < ApplicationController
+#   def index
+#     raise
+#     if params[:query].present?
+#       @movies = Movie.global_search(params[:query])
+#     else
+#       @movies = @list.movies
+#     end
+#   end
+# end
