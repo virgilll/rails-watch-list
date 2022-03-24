@@ -7,7 +7,7 @@ class Bookmark < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :global_search,
-    against: [ :title],
+    against: [ :title, :overview ],
     using: {
       tsearch: { prefix: true }
     }

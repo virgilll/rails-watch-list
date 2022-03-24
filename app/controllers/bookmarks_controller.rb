@@ -3,6 +3,12 @@ class BookmarksController < ApplicationController
   def new
     @list = List.find(params[:list_id])
     @bookmark = Bookmark.new
+    # if params[:query].present?
+    #   @movies = Movie.global_search(params[:query])
+    # # raise
+    # else
+    #   @movies = Movie.all
+    # end
   end
 
   def create
