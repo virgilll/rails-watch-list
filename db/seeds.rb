@@ -4,14 +4,14 @@ require 'json'
 
 Movie.destroy_all
 
-# def best_movie_secret_key
-#   ENV["THE_BEST_MOVIE_API_KEY"]
-# end
+def best_movie_secret_key
+  ENV["THE_BEST_MOVIE_API_KEY"]
+end
 
 i = 1
-# api_data = { key: best_movie_secret_key }
+api_data = { key: best_movie_secret_key }
 while i < 100
-  url = "https://api.themoviedb.org/3/movie/top_rated?api_key=98d380f5c292c3c5147f602f070c6815&language=en-US&page=#{i}"
+  url = "https://api.themoviedb.org/3/movie/top_rated?api_key=#{api_data[:key]}&language=en-US&page=#{i}"
 
   json = URI.open("#{url}").read
   data = JSON.parse(json)
