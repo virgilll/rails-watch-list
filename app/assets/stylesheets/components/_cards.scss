@@ -18,3 +18,13 @@
   height: 50vh;
   max-height: 400px;
 }
+
+.movie-card {
+  width: 100%;
+}
+
+.movies {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+}
