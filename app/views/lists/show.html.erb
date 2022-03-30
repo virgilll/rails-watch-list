@@ -6,34 +6,23 @@
 
 
 
-<div class="container mb-5"></div>
+<div class="container mb-5">
   <div class="row my-2">
-    <%= form_tag list_path(@list), method: :get do %>
-      <%= text_field_tag :query,
-        params[:query],
-        class: "form-control",
-        placeholder: "Search movies in list"
-      %>
-      <%= submit_tag "Search", class: "btn btn-primary" %>
-    <% end %>
-      <% @movies.each do |movie| %>
-        <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
-        <div class="col-md-4 mb-4">
-          <div class="bg-white rounded shadow h-100">
-            <%= image_tag movie.poster_url, alt: movie.title, class: "movie-img" %>
-            <div class="p-3 rounded-bottom d-flex flex-column">
-              <strong><%= movie.title %> <span class="text-muted font-weight-normal">• <%= movie.rating %> <i class="fas fa-star star-yellow"></i></span></strong>
-              <small class="text-muted"><%= movie.overview %></small>
-              <div class="d-flex align-items-end justify-content-between pt-4">
-                <div>
-                  <i class="fas fa-quote-left me-2"></i><small class="flex-grow-1"><%= bookmark.comment %></small>
-                </div>
-                <small class="text-right flex-shrink-0"><%= link_to "delete", bookmark_path(bookmark), method: :delete, data: { confirm: "Are you sure you want to remove #{movie.title} from your #{@list.name} list"}, class: 'text-danger' %></small>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
+    <div class ="col">
+      <div data-controller="refresh-list">
+          <%= form_with url: list_path(@list), method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
+            <%= f.text_field :query,
+                            class: "form-control",
+                            placeholder: 'Type a movie title',
+                            value: params[:query],
+                            data: {
+                              refresh_list_target: 'searchInput',
+                              action: "keyup->refresh-list#update"
+                            } %>
+          <% end %>
+          <%= render 'list', movies: @movies %>
+      </div>
+    </div>
   </div>
 </div>
-<%= link_to 'Add movie to list',  new_list_bookmark_path(@list), class:"btn btn-primary" %>
+<%= link_to 'Add movie to list',  new_list_bookmark_path(@list), class:"btn btn-primary mx-4" %>
